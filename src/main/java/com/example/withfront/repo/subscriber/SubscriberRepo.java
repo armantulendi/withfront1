@@ -10,7 +10,5 @@ import java.util.List;
 public interface SubscriberRepo extends CrudRepository<Subscriber,Integer> {
     List<Subscriber> getAllByUsername(String filter);
     Subscriber findByUsername(String username);
-
-
     List<Subscriber> findAllByUsername(String filter);
 }

@@ -24,8 +24,10 @@
         entityManagerFactoryRef =  Data2.entityManagerFactoryRef,
         transactionManagerRef = Data2.transactionManagerRef)
 public class SubscriberConfig {
-    @Autowired
-    private Environment env;
+
+    public SubscriberConfig(Environment env) {
+    }
+
     @Bean
     @ConfigurationProperties(prefix=Data2.configurationProperties)
     public DataSource subscriberDataSource() {

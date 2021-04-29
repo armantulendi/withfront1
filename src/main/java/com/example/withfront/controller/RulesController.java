@@ -5,7 +5,7 @@ import com.example.withfront.model.DrGateway;
 import com.example.withfront.model.DrRules;
 import com.example.withfront.repo.subscriber.DrGatewayRepo;
 import com.example.withfront.repo.subscriber.DrRulesRepo;
-import com.example.withfront.test.Ssh;
+import com.example.withfront.service.Ssh;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +57,7 @@ public class RulesController {
             newDrRules.setGwList(drRules.getGwList());
             newDrRules.setPrefix(drRules.getPrefix());
             newDrRules.setGwList(drRules.getGwList());
-            newDrRules.setTimeRec(drRules.getPrefix());
+            newDrRules.setTimeRec(drRules.getTimeRec());
             drRulesRepo.save(newDrRules);
         }else{
             drRulesRepo.save(drRules);

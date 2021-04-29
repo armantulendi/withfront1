@@ -2,10 +2,10 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>NtVoice</title>
 </head>
 <body>
-<header class="topbar" data-navbarbg="skin6" th:fragment="  header">
+<header class="topbar" style="background: linear-gradient(to right,#169d97 0%,#8eb104 100%) " data-navbarbg="skin1" th:fragment="header">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header" data-logobg="skin6">
             <!-- ============================================================== -->
@@ -16,7 +16,7 @@
                 <b class="logo-icon mr-0">
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
-                    <img th:width="200" th:height="80" src="/assets/images/logo-icon.jpg"  class="dark-logo">
+                    <img   th:width="200" th:height="100"   src="/assets/images/logo-icon.jpg"  class="dark-logo">
 
                 </b>
                 <!--End Logo icon -->
@@ -62,6 +62,11 @@
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-dark" th:href="@{/(l='kz_KZ')}">Qz</a>
+                <a class="nav-link dropdown-toggle waves-effect waves-dark" th:href="@{/(l='ru_RU')}">Ру</a>
+                <a class="nav-link dropdown-toggle waves-effect waves-dark" th:href="@{/(l='en_US')}">En</a>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" th:text="${#authentication.name}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
                     </a>
@@ -69,7 +74,7 @@
                 </li>
                 <li class="nav-item dropdown" >
                     <a class="nav-link dropdown-toggle waves-effect waves-dark"  href="/logout" th:href="@{#}" onclick="$('#form').submit();">
-                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Выйти
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true" th:text="#{logout}"></span >
                     </a>
                     <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
                 </li>

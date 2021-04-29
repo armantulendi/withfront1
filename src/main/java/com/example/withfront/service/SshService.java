@@ -1,5 +1,6 @@
 package com.example.withfront.service;
 
+import com.example.withfront.config.Variables;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -18,23 +19,22 @@ import java.util.List;
 
 @Service
 public class SshService {
-    Session session = null;
-    ChannelExec channelExec = null;
-    String hostname = "192.168.17.81";
-    String username = "root";
-    String password = "QWE@1234";
-    InputStream in;
-    InputStream err;
-    String command1 = "ngrep -W byline -d ens192 port";
-    String param1 = "5060";
-    String str = "";
-    File file;
-    BufferedReader reader;
+    private Session session = null;
+    private ChannelExec channelExec = null;
+
+    private InputStream in;
+    private InputStream err;
+    private String command1 = "ngrep -W byline -d ens192 port";
+    private String param1 = "5060";
+    private String str = "";
+    private File file;
+    private BufferedReader reader;
     public SshService() {
         try {
 
-            session = new JSch().getSession(username, hostname, 22);
-            session.setPassword(password);
+            session = new JSch().getSession(
+                    Variables.getSipProxy1(), Variables.getUSERNAME(), Variables.getRemotePort());
+            session.setPassword(Variables.getPASSWORD());
             session.setConfig("StrictHostKeyChecking", "no");
             try{
                 session.connect(2000);
@@ -49,7 +49,6 @@ public class SshService {
     public void commandStart(String folder) {
         try {
             channelExec = (ChannelExec) session.openChannel("exec");
-
             in = channelExec.getInputStream();
             err = channelExec.getErrStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
@@ -89,17 +88,13 @@ public class SshService {
     public List<String> fileRead(String filter, String fileName) throws FileNotFoundException {
         List<String> list = new ArrayList<>();
         reader = new BufferedReader(new FileReader(fileName));
-
         String line;int n=0;int b=0;
-
         while(n<100) {
             if(reader.readLine().contains(filter)) {
                 b++;
                 list.add(reader.readLine());
             }n++;
         }
-
-
         return list;
     }
 

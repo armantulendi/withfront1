@@ -12,7 +12,7 @@
     <meta name="description"
           content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Monster Lite Template by WrapPixel</title>
+    <title>NtVoice</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/monster-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
@@ -71,12 +71,12 @@
         <div class="page-breadcrumb">
             <div class="row align-items-center">
                 <div class="col-md-6 col-8 align-self-center">
-                    <h3 class="page-title mb-0 p-0">Просмотр логов</h3>
+                    <h3 class="page-title mb-0 p-0" th:text="#{viewLogs}">Просмотр логов</h3>
                     <div class="d-flex align-items-center">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                                 <li class="breadcrumb-item active" aria-current="page">Просмотр логов</li>
+                                <li class="breadcrumb-item"><a href="/" th:text="#{main}">Главная</a></li>
+                                 <li class="breadcrumb-item active" aria-current="page" th:text="#{viewLogs}">Просмотр логов</li>
                             </ol>
                             <a href="/command/klog" class="primary">Kamailio.cfg</a>
                         </nav>
@@ -100,23 +100,18 @@
                 <div class="col-sm-12" >
                     <div class="card">
                         <div class="card-body">
-                            <ul class="nav">
-                                <li class="nav-item">
-
-                                </li>
-                            </ul>
-                            <form th:action="@{/command/startCommand}" th:method="post">
-                                <label>
-                                    <input class="form-control" name="param" type="text"   placeholder="port"/>
+                            <form th:action="@{/command/startCommand}" th:method="POST">
+                                <label  >
+                                <input class="form-control" name="param" type="text"   placeholder="port"/>
                                 </label>
-                                <button  class="btn btn-primary" type="submit">Начать сбор логов</button>
+                                <button  class="btn btn-primary" type="submit" th:text="#{getLogFiles}">Начать сбор логов</button>
+                                <a th:href="@{/command/stop}" class="btn btn-primary " th:text="#{stopLogFiles}">Завершить сбор логов</a>
                             </form>
-                            <a th:href="@{/command/stop}" class="btn btn-primary ">Завершить сбор логов</a>
 
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h4> Лог файлы</h4>
+                            <h4 th:text="#{logFiles}"> Лог файлы</h4>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -185,6 +180,7 @@
 <script src="/monster-html/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="/monster-html/js/custom.js"></script>
+
 </body>
 
 </html>

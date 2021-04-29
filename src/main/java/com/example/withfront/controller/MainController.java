@@ -1,41 +1,37 @@
 package com.example.withfront.controller;
 
+import com.example.withfront.model.Calls;
+import com.example.withfront.model.MissedCalls;
+import com.example.withfront.repo.subscriber.CallRepo;
+import com.example.withfront.repo.subscriber.LocationRepo;
+import com.example.withfront.repo.subscriber.MissedCallsRepo;
+import com.example.withfront.repo.subscriber.SubscriberRepo;
+import com.example.withfront.service.ConnectToDB;
+import com.example.withfront.service.GetFomDB;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @Controller
 public class MainController {
-//    @GetMapping("/")
-//    public String get(Model model) {
-//        return "index";
-//    }
-//    @GetMapping("/table-basic")
-//    public String get1(Model model) {
-//            return "table-basic";
-//    }
-//    @GetMapping("/icon-fontawesome")
-//    public String get2(Model model) {
-//            return "icon-fontawesome";
-//    }
-//    @GetMapping("/map-google")
-//    public String get3(Model model) {
-//            return "map-google";
-//    }
-//    @GetMapping("/pages-blank")
-//    public String get4(Model model) {
-//            return "pages-blank";
-//    }
-//    @GetMapping("/pages-error-404")
-//    public String get5(Model model) {
-//            return "pages-error-404";
-//    }
-//    @GetMapping("/pages-profile")
-//    public String get6(Model model) {
-//            return "pages-profile";
-//    }
-//    @PostMapping("/pages-profile")
-//    public String post6(@ModelAttribute User user, Model model) {
-//            model.addAttribute("user",user);
-//            return "redirect:/pages-profile";
-//    }
-
+    @Autowired
+    private ConnectToDB connectToDB;
+    @Autowired
+    private SubscriberRepo subscriberRepo;
+    @Autowired
+    private LocationRepo locationRepo;
+    @RequestMapping
+    public String main(Model model){
+        long countCalls=subscriberRepo.count();
+        long countRegCallers=locationRepo.count();
+        model.addAttribute("count",connectToDB.countInTheOneDay());
+        model.addAttribute("average",connectToDB.getAverageTimeOfDiscuss());
+         model.addAttribute("missedCalls",connectToDB.getCountMissedCalls());
+         model.addAttribute("countCalls",subscriberRepo.count());
+         model.addAttribute("countRegCallers", locationRepo.countReg());
+         model.addAttribute("countNotRegCallers", countCalls-countRegCallers);
+        return "index";
+    }
 }

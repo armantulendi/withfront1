@@ -1,6 +1,5 @@
 package com.example.withfront.controller;
 
-import com.example.withfront.model.DrRules;
 import com.example.withfront.model.Role;
 import com.example.withfront.model.User;
 import com.example.withfront.repo.user.UserRepo;
@@ -10,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +17,16 @@ import java.util.Optional;
 
 @Controller
 public class UserController {
-    @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
     @Autowired
     UserService userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserController(UserRepo userRepo, PasswordEncoder passwordEncoder) {
+        this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @GetMapping( "users")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String getUser(@RequestParam(required=false,defaultValue="" ) String filter, Model model){

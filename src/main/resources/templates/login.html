@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>NtVoice</title>
 </head>
 <body>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -16,7 +16,7 @@
 
         <!-- Icon -->
         <b class="logo-icon mr-0">
-            <img  th:width="200" th:height="80" src="assets/images/logo-icon.jpg"  class="dark-logo">
+            <img  src="assets/images/logo-icon.jpg"  class="dark-logo">
 
             <!--         <img src="/d3.jpg"  id="icon" alt="User Icon" /> -->
         </b>
@@ -29,13 +29,16 @@
         <!-- Login Form -->
         <form th:action="@{login}" method="post">
             <div>
-            <label for="login"><input type="text" id="login" class="fadeIn second" name="username" placeholder="логин"></label>
+            <label for="login"><input type="text" id="login" class="fadeIn second"   name="username" th:placeholder="#{login.username}"></label>
             </div>
             <div>
-            <label for="password"><input type="password" id="password" class="fadeIn third" name="password" placeholder="пароль"></label>
+            <label for="password" ><input type="password" id="password"  class="fadeIn third" name="password" th:placeholder="#{login.password}"></label>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <div><input type="submit" class="fadeIn fourth" value="Войти"></div>
+                <div><input type="submit" class="fadeIn fourth" th:value="#{login.input}"></div>
+            <a class="btn btn-sm" th:href="@{/login(l='kz_KZ')}">Qz</a>
+            <a class="btn btn-sm" th:href="@{/login(l='ru_RU')}">Ру</a>
+            <a class="btn btn-sm" th:href="@{/login(l='en_US')}">En</a>
         </form>
     </div>
 </div>

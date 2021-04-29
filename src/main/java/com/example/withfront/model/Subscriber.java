@@ -21,5 +21,4 @@ public class Subscriber {
     private String ha1;
     private String ha1b;
 
-
 }

@@ -4,7 +4,7 @@ import com.example.withfront.exception.RecordNotFoundException;
 import com.example.withfront.model.Dialplan;
 import com.example.withfront.repo.subscriber.DialplanRepo;
 import com.example.withfront.service.ControlService;
-import com.example.withfront.test.Ssh;
+import com.example.withfront.service.Ssh;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("control-input-routes")
-public class ControlInputRoutes {
+public class    ControlInputRoutes {
     private final ControlService controlService;
     private final DialplanRepo dialplanRepo;
 
@@ -62,7 +62,7 @@ public class ControlInputRoutes {
     }
     @PostMapping
     public String activate(Model model){
-        List<String> list=Ssh.reload("kamcmd dialplan.reload");
+        List<String> list= Ssh.reload("kamcmd dialplan.reload");
 //        if (list.get(0).equals("")&&list.get(1).equals(""))
 //        model.addAttribute("reload","применено");
         return "redirect:/control-input-routes";

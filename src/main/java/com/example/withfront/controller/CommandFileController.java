@@ -21,24 +21,25 @@ import java.util.Scanner;
 @Controller
 @RequestMapping("/command")
 public class CommandFileController  {
-List<String> list=new LinkedList<>();
+    List<String> list=new LinkedList<>();
     private final SystemService systemService;
     private SshService sshService;
-
+    private SystemService service  ;
     public CommandFileController(SystemService systemService) {
         this.systemService = systemService;
     }
-
     @Autowired
-    public CommandFileController(SystemService systemService, SshService sshService) {
+    public CommandFileController(SystemService systemService, SshService sshService, SystemService service) {
         this.systemService = systemService;
         this.sshService = sshService;
+        this.service = service;
     }
 
     @GetMapping
     public String getCommand(Model model) throws FileNotFoundException {
         File[] files = systemService.getFolder().listFiles();
         model.addAttribute("files",files);
+        service.getFolder();
         return "commands";
     }
 

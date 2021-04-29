@@ -18,7 +18,7 @@ public class FileFilterExam {
         return "";
     }
     @SneakyThrows
-    public static    void main(String[] args) {
+    public static  void main(String[] args) {
         String s1;BufferedReader is;Pattern pattern;Matcher matcher;
         String s="asfdqwe qwerwefsd fsffer erdfs hello" +
                 "qwerqwe sdfg 2015";

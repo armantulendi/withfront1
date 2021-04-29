@@ -16,10 +16,14 @@ import java.util.Optional;
 @Controller
 @RequestMapping("groups")
 public class GroupsController {
-    @Autowired
-    private DrGroupsRepo drGroupsRepo;
-    @Autowired
-    private DrRulesRepo drRulesRepo;
+    private final DrGroupsRepo drGroupsRepo;
+    private final DrRulesRepo drRulesRepo;
+
+    public GroupsController(DrGroupsRepo drGroupsRepo, DrRulesRepo drRulesRepo) {
+        this.drGroupsRepo = drGroupsRepo;
+        this.drRulesRepo = drRulesRepo;
+    }
+
     @GetMapping
     public String greeting(@RequestParam(required=false,value = "username") String username, Model model ) {
         List<DrGroups> data;

@@ -10,7 +10,7 @@
     <meta name="description"
           content="Monster Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Monster Lite Template by WrapPixel</title>
+    <title>NtVoice</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/monster-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
@@ -20,183 +20,284 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 
     <link th:href="@{/monster-html/css/style.min.css}" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <link th:href="@{/css/forCounter.css}" rel="stylesheet">
+    <link th:href="@{/css/forCircle.css}" rel="stylesheet">
+
+
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script th:src="@{/js/forCounter.js} "></script>
+    <script th:src="@{/js/forCircle.js} "></script>
+    <style type="text/css">:root {
+        background: #fff;
+    }
+
+    span#procent {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        font-size: 50px;
+        transform: translate(-50%, -50%);
+        color: #22a927;
+    }
+
+    /*span#procent::after {*/
+    /*    content: '%';*/
+    /*}*/
+
+    .canvas-wrap {
+        position: relative;
+        width: 250px;
+        height: 250px;
+    }</style>
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
+
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+
+<div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
     </div>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin3" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
     <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div th:replace="template/header :: header"></div>
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <div th:replace="template/navbar :: navbar"></div>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+
+    <div class="page-wrapper">
         <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
-        <div th:replace="template/header :: header"></div>
+        <div class="page-breadcrumb">
+            <div class="row align-items-center">
+                <div class="col-md-6 col-8 align-self-center">
+                    <h3 class="page-title mb-0 p-0" th:text="#{dashboard}">Dashboard</h3>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/" th:text="#{main}">Главная</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="#{dashboard}">Dashboard</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <!-- ============================================================== -->
-        <!-- End Topbar header -->
+        <!-- End Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
         <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- Container fluid  -->
         <!-- ============================================================== -->
-        <div th:replace="template/navbar :: navbar"></div>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div class="container-fluid">
             <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
+            <!-- Sales chart -->
             <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row align-items-center">
-                    <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="page-title mb-0 p-0">Dashboard</h3>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                                </ol>
-                            </nav>
+            <div class="row">
+                <!-- Column -->
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" th:text="#{index.call}" > </h4><span th:text="#{today}">за сегодня:</span>
+                            <div class="text-end">
+                                <h2 class="font-light mb-0 " style="color: green" > <div class="count"><span th:text="${count}"></span></div> </h2>
+                                <span class="text-muted" th:text="#{inputs}">Входящие</span>
+                            </div>
                         </div>
                     </div>
-
                 </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" th:text="#{index.avgCalls}"></h4><span th:text="#{today}">за сегодня:</span>
+                            <div class="text-end">
+                                <h2 class="font-light mb-0 countDrop" style="color: black"> <span th:text="${average}" ></span> </h2>
+                                <span class="text-muted" th:text="#{sec}"> сек</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" th:text="#{index.missedCalls}"></h4><span th:text="#{today}">за сегодня:</span>
+                            <div class="text-end">
+                                <h2 class="font-light mb-0 count" style="color: red">
+                                    <div>
+                                        <span th:text="${missedCalls}"></span> </div></h2>
+                                <span class="text-muted" th:text="#{missedCalls}" >пропущенных</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card"> <div class="card-body">
+                        <h4 class="card-title" th:text="#{index.activeNumbers}"> </h4>
+                        <div class="canvas-wrap">
+                        <canvas id="canvas" width="250" height="250"></canvas>
+                        <span id="procent" ></span>
+                    </div>
+                           <ul class="list-inline d-flex justify-content-center align-items-center mb-0">
+                                <li class="me-4">
+                                    <h6 class="text-success" th:text="${countRegCallers}+' : '+#{index.online}"> </h6>
+                                </li>
+                                <li class="me-4">
+                                    <h6 style="color: #94c8ea" th:text="${countNotRegCallers}+' : '+#{index.offline}">  </h6>
+                                </li>
+                            </ul>
+
+                    </div>
+                    </div>
+                </div>
+
+
             </div>
             <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Sales chart -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- Column -->
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Daily Sales</h4>
-                                <div class="text-end">
-                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-success"></i> $120</h2>
-                                    <span class="text-muted">Todays Income</span>
-                                </div>
-                                <span class="text-success">80%</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 80%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Weekly Sales</h4>
-                                <div class="text-end">
-                                    <h2 class="font-light mb-0"><i class="ti-arrow-up text-info"></i> $5,000</h2>
-                                    <span class="text-muted">Todays Income</span>
-                                </div>
-                                <span class="text-info">30%</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                </div>
-                <!-- ============================================================== -->
-                <!-- Sales chart -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- column -->
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Revenue Statistics</h4>
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content " id="flot-line-chart" style="padding: 0px; position: relative;">
-                                        <canvas class="flot-base w-100" height="400"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- column -->
-                </div>
-                <!-- ============================================================== -->
-                <!-- Table -->
-                <!-- ============================================================== -->
-
-                <!-- ============================================================== -->
-                <!-- Table -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Recent blogss -->
-                <!-- ============================================================== -->
-
-                <!-- ============================================================== -->
-                <!-- Recent blogss -->
-                <!-- ============================================================== -->
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
+            <!-- Sales chart -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer text-center">
+            © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
         <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
-    <!-- End Wrapper -->
+    <!-- End Page wrapper  -->
     <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/monster-html/js/app-style-switcher.js"></script>
-    <!--Wave Effects -->
-    <script src="/monster-html/js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="/monster-html/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
-    <script src="/monster-html/js/custom.js"></script>
-    <!--This page JavaScript -->
-    <!--flot chart-->
-    <script src="/assets/plugins/flot/jquery.flot.js"></script>
-    <script src="/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="/monster-html/js/pages/dashboards/dashboard1.js"></script>
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/monster-html/js/app-style-switcher.js"></script>
+<!--Wave Effects -->
+<script src="/monster-html/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/monster-html/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/monster-html/js/custom.js"></script>
+<!--This page JavaScript -->
+<!--flot chart-->
+<script type="text/javascript">
+    window.onload = function() {
+        var can = document.getElementById('canvas'),
+            spanProcent = document.getElementById('procent'),
+            c = can.getContext('2d');
+
+        var posX = can.width / 2,
+            posY = can.height / 2,
+            fps = 1000 / 100,
+            procent = 0,
+            all=[[${countCalls}]],
+            notReg=all-[[${countNotRegCallers}]],
+            oneProcent = 360 / all  ,
+            result = oneProcent * [[${countRegCallers}]];
+
+        c.lineCap = 'round';
+        arcMove();
+
+        function arcMove(){
+            var deegres = 0;
+            var acrInterval = setInterval (function() {
+                deegres += 1;
+                c.clearRect( 0, 0, can.width, can.height );
+                procent = deegres / oneProcent;
+                notReg=deegres / oneProcent;
+                spanProcent.innerHTML = procent.toFixed() ;
+
+                c.beginPath();
+                c.arc( posX, posY, 70, (Math.PI/180) * 270, (Math.PI/180) * (270 + 360) );
+                c.strokeStyle = '#94c8ea';
+                c.lineWidth = '20';
+                c.stroke();
+
+                c.beginPath();
+                c.strokeStyle = '#22a927';
+                c.lineWidth = '20';
+                c.arc( posX, posY, 70, (Math.PI/180) * 270, (Math.PI/180) * (270 + deegres) );
+                c.stroke();
+                if( deegres >= result )
+                    clearInterval(acrInterval);
+            }, fps);
+
+        }
+
+
+    }</script>
+<script>
+
+    $(document).ready(function () {
+
+        $('.count').each(function () {
+            $(this).prop('Counter',0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 1000,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.round(now));
+                }
+            });
+        });
+
+    });
+    $(document).ready(function () {
+
+        $('.countDrop').each(function () {
+            $(this).prop('Counter',0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 1000,
+                easing: 'swing',
+                step: function (now) {
+
+                    $(this).text(Math.round(now*100)/100);
+                }
+            });
+        });
+
+    });
+</script>
+<script src="/assets/plugins/flot/jquery.flot.js"></script>
+<script src="/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+<script src="/monster-html/js/pages/dashboards/dashboard1.js"></script>
 </body>
 
 </html>
